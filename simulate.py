@@ -1,8 +1,9 @@
 import pandas as pd
+import os
 from data_fetcher import fetch_binance_data
 from mean_reversion import apply_mean_reversion_strategy
 
-def simulate_trading(df, mode='all_in'):
+def simulate_trading(df, mode='all_in', strategy='unknown'):
     initial_balance = 1000
     balance_usdt = initial_balance
     balance_btc = 0
@@ -60,25 +61,50 @@ def simulate_trading(df, mode='all_in'):
             'balance_usdt': round(balance_usdt, 2),
             'balance_btc': round(balance_btc, 6),
             'total_balance_usdt': round(total_balance_usdt, 2),
-            'stop_triggered': stop_triggered
+            'stop_triggered': stop_triggered,
+            'strategy': strategy,
+            'mode': mode
         })
 
 
     final_price = df.iloc[-1]['close']
     final_balance = balance_usdt + balance_btc * final_price
 
-    print(f"\nMode: {mode.upper()}")
+    print(f"\nStrategy: {strategy.upper()}")
+    print(f"Mode: {mode.upper()}")
     print(f"Starting balance: {initial_balance} USDT")
     print(f"Final balance: {round(final_balance, 2)} USDT")
     print(f"Profit: {round(final_balance - initial_balance, 2)} USDT")
 
     results_df = pd.DataFrame(results)
-    results_df.to_csv('trading_simulation.csv', index=False)
+    results_df.to_csv('trading_simulation.csv', 
+                  index=False, 
+                  mode='a', 
+                  header=not os.path.exists('trading_simulation.csv'))
+    
+    # Two new lines
+    with open('trading_simulation.csv', 'a') as f:
+        f.write('\n\n---------------------------------------------------------------------------------------------------------------------------------------------\n\n\n')
 
 
 if __name__ == '__main__':
     df = fetch_binance_data()
-    df = apply_mean_reversion_strategy(df)
-    
-    simulate_trading(df, mode='all_in')
-    simulate_trading(df, mode='scaled')
+
+    # Mean Reversion
+    from mean_reversion import apply_mean_reversion_strategy
+    df_reversion = apply_mean_reversion_strategy(df.copy())
+    simulate_trading(df_reversion, mode='all_in', strategy='mean_reversion')
+    simulate_trading(df_reversion, mode='scaled', strategy='mean_reversion')
+
+    # Momentum
+    from momentum import apply_momentum_strategy
+    df_momentum = apply_momentum_strategy(df.copy())
+    simulate_trading(df_momentum, mode='all_in', strategy='momentum')
+    simulate_trading(df_momentum, mode='scaled', strategy='momentum')
+
+    # Trend Breakout
+    from trend_breakout import apply_trend_breakout_strategy
+    df_breakout = apply_trend_breakout_strategy(df.copy())
+    simulate_trading(df_breakout, mode='all_in', strategy='trend_breakout')
+    simulate_trading(df_breakout, mode='scaled', strategy='trend_breakout')
+
