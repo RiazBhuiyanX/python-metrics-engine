@@ -6,11 +6,11 @@
 ## 📚 Table of Contents
 
 - [🧠 Summary](#-summary)
-- [⚙️ Tech Stack](#-tech-stack)
-- [📂 Project Structure](#-project-structure)
-- [🛠️ How to Run](#️-how-to-run)
+- [⚙️ Tech Stack](#%EF%B8%8F-tech-stack)
+- [📂 Project Structure](#%EF%B8%8F-project-structure)
+- [🛠️ How to Run](#️%EF%B8%8F-how-to-run)
 
-## ✅ Summary
+## 🧠 Summary
 
 This project explores whether a fixed capital of 1000 USDT can be grown through algorithmic trading on the BTC/USDT pair. I implemented three different trading strategies (**Mean Reversion**, **Momentum**, and **Trend Breakout**) in two modes: **All-In** and **Scaled Positioning**. Rather than focusing solely on maximizing profit, my primary objective was to explore how strategies behave under different market conditions, manage risk, and maintain capital.
 
