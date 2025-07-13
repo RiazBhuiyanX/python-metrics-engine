@@ -6,8 +6,8 @@
 ## 📚 Table of Contents
 
 - [🧠 Summary](#summary)
-- [⚙️ Tech Stack](#tech-stack)
-- [📂 Project Structure](#project-structure)
+- [⚙️ Tech Stack](#-tech-stack)
+- [📂 Project Structure](#-project-structure)
 - [🛠️ How to Run](#️how-to-run)
 
 ## ✅ Summary
