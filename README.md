@@ -8,7 +8,7 @@
 - [🧠 Summary](#-summary)
 - [⚙️ Tech Stack](#%EF%B8%8F-tech-stack)
 - [📂 Project Structure](#%EF%B8%8F-project-structure)
-- [🛠️ How to Run](#️%EF%B8%8F-how-to-run)
+- [🛠️ How to Run](#️-how-to-run)
 
 ## 🧠 Summary
 
