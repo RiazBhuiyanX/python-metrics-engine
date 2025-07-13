@@ -3,8 +3,8 @@ def apply_trend_breakout_strategy(df, lookback=20):
     df['recent_low'] = df['close'].rolling(window=lookback).min()
 
     df['signal'] = 0
-    df.loc[df['close'] > df['recent_high'].shift(1), 'signal'] = 1   # BUY сигнал
-    df.loc[df['close'] < df['recent_low'].shift(1), 'signal'] = -1  # SELL сигнал
+    df.loc[df['close'] > df['recent_high'].shift(1), 'signal'] = 1   # BUY
+    df.loc[df['close'] < df['recent_low'].shift(1), 'signal'] = -1  # SELL
 
     df[['close', 'recent_high', 'recent_low']] = df[['close', 'recent_high', 'recent_low']].round(2)
 
