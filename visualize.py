@@ -89,13 +89,13 @@ def plot_drawdown(path, label):
 if __name__ == "__main__":
     plot_summary_comparison()
 
+    plot_strategy_breakdown("mean_reversion")
+    plot_strategy_breakdown("momentum")
+    plot_strategy_breakdown("trend_breakout")
+    
     plot_drawdown("output/simulation_mean_reversion_all_in.csv", "Mean Reversion All-In")
     plot_drawdown("output/simulation_mean_reversion_scaled.csv", "Mean Reversion Scaled")
     plot_drawdown("output/simulation_momentum_all_in.csv", "Momentum All-In")
     plot_drawdown("output/simulation_momentum_scaled.csv", "Momentum Scaled")
     plot_drawdown("output/simulation_trend_breakout_all_in.csv", "Trend Breakout All-In")
     plot_drawdown("output/simulation_trend_breakout_scaled.csv", "Trend Breakout Scaled")
-
-    plot_strategy_breakdown("mean_reversion")
-    plot_strategy_breakdown("momentum")
-    plot_strategy_breakdown("trend_breakout")
