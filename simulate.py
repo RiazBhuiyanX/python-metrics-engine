@@ -1,13 +1,15 @@
-import pandas as pd
 import os
-from data_fetcher import fetch_binance_data
-from mean_reversion import apply_mean_reversion_strategy
+import pandas as pd
+from core.data_fetcher import fetch_binance_data
+from core.metrics import calculate_metrics
+from strategies.mean_reversion import apply_mean_reversion_strategy
+from strategies.momentum import apply_momentum_strategy
+from strategies.trend_breakout import apply_trend_breakout_strategy
 
 def simulate_trading(df, mode='all_in', strategy='unknown'):
     initial_balance = 1000
     balance_usdt = initial_balance
     balance_btc = 0
-    entry_price = None
     stop_threshold = initial_balance * 0.8  # if fall under this threshold, trigger stop (80% of initial balance)
     stop_triggered = False 
     results = []
@@ -28,21 +30,16 @@ def simulate_trading(df, mode='all_in', strategy='unknown'):
                 btc_bought = buy_amount / price
                 balance_btc += btc_bought
                 balance_usdt -= buy_amount
-                entry_price = price if not entry_price else entry_price
 
         # SELL logic
         elif signal == -1:
             if mode == 'all_in' and balance_btc > 0:
                 balance_usdt += balance_btc * price
                 balance_btc = 0
-                entry_price = None
             elif mode == 'scaled' and balance_btc > 0:
                 sell_amount = balance_btc * 0.05
                 balance_usdt += sell_amount * price
                 balance_btc -= sell_amount
-                if balance_btc == 0:
-                    entry_price = None
-
         
         total_balance_usdt = balance_usdt + balance_btc * price
 
@@ -77,27 +74,30 @@ def simulate_trading(df, mode='all_in', strategy='unknown'):
     print(f"Profit: {round(final_balance - initial_balance, 2)} USDT")
 
     results_df = pd.DataFrame(results)
-    filename = f"simulation_{strategy}_{mode}.csv"
+    filename = f"output/simulation_{strategy}_{mode}.csv"
     results_df.to_csv(filename, index=False)
 
+    metrics = calculate_metrics(results_df)
+
+    print("Performance metrics:")
+    for k, v in metrics.items():
+        print(f"  {k}: {v}")
+    
     
 if __name__ == '__main__':
     df = fetch_binance_data()
 
     # Mean Reversion
-    from mean_reversion import apply_mean_reversion_strategy
     df_reversion = apply_mean_reversion_strategy(df.copy())
     simulate_trading(df_reversion, mode='all_in', strategy='mean_reversion')
     simulate_trading(df_reversion, mode='scaled', strategy='mean_reversion')
 
     # Momentum
-    from momentum import apply_momentum_strategy
     df_momentum = apply_momentum_strategy(df.copy())
     simulate_trading(df_momentum, mode='all_in', strategy='momentum')
     simulate_trading(df_momentum, mode='scaled', strategy='momentum')
 
     # Trend Breakout
-    from trend_breakout import apply_trend_breakout_strategy
     df_breakout = apply_trend_breakout_strategy(df.copy())
     simulate_trading(df_breakout, mode='all_in', strategy='trend_breakout')
     simulate_trading(df_breakout, mode='scaled', strategy='trend_breakout')

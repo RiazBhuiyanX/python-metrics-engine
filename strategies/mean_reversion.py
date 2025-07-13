@@ -9,5 +9,5 @@ def apply_mean_reversion_strategy(df, sma_window=10, threshold=0.2):
 
     df[['close', 'sma_20', 'diff', 'percent_diff']] = df[['close', 'sma_20', 'diff', 'percent_diff']].round(2)
 
-    df[['timestamp', 'close', 'sma_20', 'diff', 'percent_diff', 'signal']].to_csv('btc_signals_mean_reversion.csv', index=False)
+    df[['timestamp', 'close', 'sma_20', 'diff', 'percent_diff', 'signal']].to_csv('signals/btc_signals_mean_reversion.csv', index=False)
     return df

@@ -8,6 +8,6 @@ def apply_trend_breakout_strategy(df, lookback=20):
 
     df[['close', 'recent_high', 'recent_low']] = df[['close', 'recent_high', 'recent_low']].round(2)
 
-    df[['timestamp', 'close', 'recent_high', 'recent_low', 'signal']].to_csv('btc_signals_trend_breakout.csv', index=False)
+    df[['timestamp', 'close', 'recent_high', 'recent_low', 'signal']].to_csv('signals/btc_signals_trend_breakout.csv', index=False)
 
     return df
