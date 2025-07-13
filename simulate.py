@@ -77,16 +77,10 @@ def simulate_trading(df, mode='all_in', strategy='unknown'):
     print(f"Profit: {round(final_balance - initial_balance, 2)} USDT")
 
     results_df = pd.DataFrame(results)
-    results_df.to_csv('trading_simulation.csv', 
-                  index=False, 
-                  mode='a', 
-                  header=not os.path.exists('trading_simulation.csv'))
+    filename = f"simulation_{strategy}_{mode}.csv"
+    results_df.to_csv(filename, index=False)
+
     
-    # Two new lines
-    with open('trading_simulation.csv', 'a') as f:
-        f.write('\n\n---------------------------------------------------------------------------------------------------------------------------------------------\n\n\n')
-
-
 if __name__ == '__main__':
     df = fetch_binance_data()
 
