@@ -234,7 +234,7 @@ In live markets, position sizing and risk control are often more important than 
 
 This made the testing **more interpretable** and kept the focus on strategy behavior, not edge-case mechanics.
 
-## 🔄 Out-of-Sample Re-Run (New Market Data)
+## 🔄 Out-of-Sample Performance (Fresh Market Data)
 
 After submission, I re-ran the strategies on freshly fetched data (same strategy logic, different time window). Here’s what I observed:
 
