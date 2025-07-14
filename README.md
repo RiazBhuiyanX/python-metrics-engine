@@ -18,6 +18,7 @@
 - [🚀 What I’d Improve with More Time](#-what-id-improve-with-more-time)
 - [🐞 Challenges & Bugs I Solved](#-challenges--bugs-i-solved)
 - [🎯 Final Reflections](#-final-reflections)
+- [📎 Appendix & Project Info](#-appendix--project-info)
 
 ## 🧠 Summary
 
