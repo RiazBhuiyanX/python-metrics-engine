@@ -4,6 +4,9 @@ import os
 
 
 def plot_summary_comparison():
+    """
+    Plot total USDT balance over time for all strategies and modes (summary view).
+    """
     files = {
         'Mean Reversion (All-In)': 'output/simulation_mean_reversion_all_in.csv',
         'Mean Reversion (Scaled)': 'output/simulation_mean_reversion_scaled.csv',
@@ -38,6 +41,9 @@ def plot_summary_comparison():
 
 
 def plot_strategy_breakdown(strategy_name):
+    """
+    Plot a breakdown for one strategy in both All-In and Scaled modes.
+    """
     modes = ['all_in', 'scaled']
     plt.figure(figsize=(12, 6))
 
@@ -62,6 +68,9 @@ def plot_strategy_breakdown(strategy_name):
     plt.show()
 
 def plot_drawdown(path, label):
+    """
+    Plot drawdown over time for a single strategy/mode.
+    """    
     if not os.path.exists(path):
         print(f"File not found: {path}")
         return
@@ -87,12 +96,15 @@ def plot_drawdown(path, label):
 
 
 if __name__ == "__main__":
+    # Plot overall strategy comparison
     plot_summary_comparison()
 
+    # Plot individual strategy breakdowns
     plot_strategy_breakdown("mean_reversion")
     plot_strategy_breakdown("momentum")
     plot_strategy_breakdown("trend_breakout")
-    
+
+    # Plot drawdowns for all strategies/modes
     plot_drawdown("output/simulation_mean_reversion_all_in.csv", "Mean Reversion All-In")
     plot_drawdown("output/simulation_mean_reversion_scaled.csv", "Mean Reversion Scaled")
     plot_drawdown("output/simulation_momentum_all_in.csv", "Momentum All-In")
