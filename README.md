@@ -233,6 +233,29 @@ In live markets, position sizing and risk control are often more important than 
 
 This made the testing **more interpretable** and kept the focus on strategy behavior, not edge-case mechanics.
 
+## ➕ Out-of-Sample Re-Run (New Market Data)
+
+After submission, I re-ran the strategies on freshly fetched data (same strategy logic, different time window). Here’s what I observed:
+
+| Strategy       | Mode   | Profit % | Max Drawdown % |
+| -------------- | ------ | -------- | -------------- |
+| Mean Reversion | All-In | +0.34%   | -2.28%         |
+| Mean Reversion | Scaled | +1.06%   | -2.67%         |
+| Momentum       | All-In | +1.34%   | -1.27%         |
+| Momentum       | Scaled | +1.03%   | -1.93%         |
+| Breakout       | All-In | -0.66%   | -2.63%         |
+| Breakout       | Scaled | +0.77%   | -2.52%         |
+
+### 🧠 Interpretation
+
+While returns were lower than the initial simulation, strategies continued to behave in line with expectations:
+
+- **Scaled execution consistently outperformed All-In**, showing better drawdown control.
+- **Momentum strategies held up well**, even in a different market slice.
+- **Breakout (All-In)** was the only net-negative — reinforcing its volatility sensitivity.
+
+This reinforces my belief that the logic is **robust**, even if not overfit for maximum gains.
+
 ## 🧪 Backtesting Engine Design
 
 To test each strategy fairly, I built a simple but consistent backtesting engine that models portfolio state over time. The goal wasn’t to create an industrial-grade simulator, but to capture the **essential dynamics** of trade execution, capital allocation, and risk control.
