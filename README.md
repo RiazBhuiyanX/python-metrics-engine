@@ -11,6 +11,7 @@
 - [🛠️ How to Run](#️-how-to-run)
 - [🧭 Strategy Exploration & Justification](#-strategy-exploration--justification)
 - [📉 Risk Management & Capital Protection](#-risk-management--capital-protection)
+- [🔄 Out-of-Sample Performance (Fresh Market Data)](#-out-of-sample-performance-fresh-market-data)
 - [🧪 Backtesting Engine Design](#-backtesting-engine-design)
 - [📊 Metrics & Performance Interpretation](#-metrics--performance-interpretation)
 - [📈 Strategy Performance Comparison: All-In vs Scaled](#-strategy-performance-comparison-all-in-vs-scaled)
@@ -233,7 +234,7 @@ In live markets, position sizing and risk control are often more important than 
 
 This made the testing **more interpretable** and kept the focus on strategy behavior, not edge-case mechanics.
 
-## ➕ Out-of-Sample Re-Run (New Market Data)
+## 🔄 Out-of-Sample Re-Run (New Market Data)
 
 After submission, I re-ran the strategies on freshly fetched data (same strategy logic, different time window). Here’s what I observed:
 
