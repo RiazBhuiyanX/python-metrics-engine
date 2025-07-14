@@ -720,8 +720,7 @@ This project is provided for educational purposes only under the MIT License.
 
 ### 🙏 Acknowledgements
 
-Thanks to the Raven team for designing such an open-ended and intellectually rewarding challenge.  
-And a special nod to the Discord community — reading others' struggles and progress kept me motivated and focused.
+Thanks to the Raven team for designing such an open-ended and intellectually rewarding challenge.
 
 ### ⚠️ Disclaimer
 
