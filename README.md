@@ -1,6 +1,5 @@
 <h1 align="left">
-  <img src="extras/raven_logo_256.png" alt="Logo" width="40" style="vertical-align: middle;"/>
-  Raven Quant Task
+  PyMetrics Analysis Engine
 </h1>
 
 ## 📚 Table of Contents
@@ -8,45 +7,50 @@
 - [🧠 Summary](#-summary)
 - [⚙️ Tech Stack](#%EF%B8%8F-tech-stack)
 - [📂 Project Structure](#%EF%B8%8F-project-structure)
-- [🛠️ How to Run](#️-how-to-run)
+- [🛠️ How to Run (CLI Automation)](#-how-to-run-cli-automation)
+- [🌐 API Integration & Robust Data Ingestion](#️-api-integration--robust-data-ingestion)
 - [🧭 Strategy Exploration & Justification](#-strategy-exploration--justification)
-- [📉 Risk Management & Capital Protection](#-risk-management--capital-protection)
+- [📉 Risk Control & Capital Allocation Modeling](#-risk-management--capital-protection)
 - [🔄 Out-of-Sample Performance (Fresh Market Data)](#-out-of-sample-performance-fresh-market-data)
-- [🧪 Backtesting Engine Design](#-backtesting-engine-design)
+- [🧪 Core Engine Design (State Management)](#-backtesting-engine-design)
 - [📊 Metrics & Performance Interpretation](#-metrics--performance-interpretation)
 - [📈 Strategy Performance Comparison: All-In vs Scaled](#-strategy-performance-comparison-all-in-vs-scaled)
 - [📉 Drawdown Analysis & Risk Behavior](#-drawdown-analysis--risk-behavior)
-- [🚀 What I’d Improve with More Time](#-what-id-improve-with-more-time)
-- [🐞 Challenges & Bugs I Solved](#-challenges--bugs-i-solved)
+- [🚀 Future Improvements & Robustness](#-future-improvements--robustness)
+- [🐞 Key Problem-Solving Challenges](#-key-problem-solving-challenges)
 - [🎯 Final Reflections](#-final-reflections)
-- [📎 Appendix & Project Info](#-appendix--project-info)
+- [📎 Project Info](#-project-info)
 
 ## 🧠 Summary
 
-I'm basically testing if I can grow a fixed pot of 1000 USDT by algorithmically trading the BTC/USDT pair. I built three different trading strategies (**Mean Reversion**, **Momentum**, and **Trend Breakout**), and I ran each in two flavors: **All-In** and **Scaled Positioning**. Instead of just chasing maximum profit, my main goal was to see how these strategies behave in different market scenarios, how they handle risk, and whether they can hang onto capital (so I don’t go bust in the process).
+Hey there! So, I've basically cooked up a **Python backend engine** just for checking out time series data and testing out different algorithmic theories. The main thing wasn't chasing massive profits... I really wanted to build a **solid**, **reliable simulation playground**. This let me see how different **money management styles** (like going all-in versus scaling things back) affect the **stability** and **risk** of my code's signals. It's all about keeping the system safe, you know?
 
 ## ⚙️ Tech Stack
 
 - **Language**: Python 3.10+
-- **Data Source**: Real-time historical OHLCV from Binance via `ccxt`
-- **Backtesting Framework**: Custom simulator with state management and stop-loss logic
-- **Visualization**: Matplotlib for comparative analysis and drawdown monitoring
+- **API Integration**: Robust data ingestion via `ccxt`. Includes **Error Handling** (`try...except`) for system stability and fault tolerance during network disruptions
+- **Data Processing**: `pandas` for efficient time series manipulation and analytical calculations
+- **Testing Core**: Custom-built backtesting engine responsible for **portfolio state management** and enforcing risk rules
+- **Automation & CLI**: `argparse` facilitates **Command-Line Interface** control, enabling test automation and CI integration
+- **Visualization**: Matplotlib is utilized for precise visual representations of comparative performance
 
 ## 🗂️ Project Structure
 
-- `simulate.py` — runs all simulations and writes output files
-- `visualize.py` — generates comparison, breakdown, and drawdown plots
-- `core/`
-  - `data_fetcher.py` — fetches and saves BTC/USDT data from Binance
-  - `metrics.py` — computes performance metrics (growth, drawdown, signal count)
-- `strategies/`
-  - `mean_reversion.py` — logic for mean reversion strategy
-  - `momentum.py` — logic for momentum strategy
-  - `trend_breakout.py` — logic for trend breakout strategy
-- `signals/` — stores generated strategy signals as `.csv`
-- `output/` — stores simulation results and generated charts (`.csv` + `.png`)
+The project utilizes a modular architecture for separation of concerns and testability.
 
-## 🛠️ How to Run
+- `simulate.py` — **Main Execution Engine (CLI)**: Orchestrates pipeline, manages **portfolio state**, and logs results
+- `visualize.py` — **Metrics Visualization Tool**: Generates comparative plots and drawdown analysis
+- `core/` — **Core Backend Services**:
+  - `data_fetcher.py` — Manages **API Integration**. Includes **robust error handling** for stability
+  - `metrics.py` — Computes all key performance metrics (Max Drawdown, Growth %)
+- `strategies/` — **Signal Logic Module**: Stores individual algorithmic hypothesis files
+  - `mean_reversion.py` — Logic for mean reversion strategy
+  - `momentum.py` — Logic for momentum strategy
+  - `trend_breakout.py` — logic for trend breakout strategy
+- `signals/` — Directory for generated strategy signals `.csv`
+- `output/` — Directory for final simulation results and charts (`.csv` + `.png`)
+
+## 🛠️ How to Run (CLI Automation)
 
 To run the project, follow these steps:
 
@@ -55,8 +59,8 @@ To run the project, follow these steps:
 # You can get it from https://www.python.org/downloads/
 
 # Clone the repository
-git clone https://github.com/RiazBhuiyan03/raven-quant-task.git
-cd raven-quant-task
+git clone https://github.com/RiazBhuiyanX/python-metrics-engine.git
+cd python-metrics-engine
 
 # Install dependencies (option 1 - recommended)
 pip install -r requirements.txt
@@ -85,12 +89,29 @@ You do **not** need to re-run the scripts unless you want to test live data agai
 You can re-run the full pipeline on new Binance data by doing:
 
 ```bash
-# Run the simulation script
+# Runs ALL strategies in ALL modes (default)
 python simulate.py
+
+# Runs only the Momentum strategy in Scaled mode
+python simulate.py --strategy momentum --mode scaled
+
+# Runs only the Momentum strategy in All-In mode
+python simulate.py --strategy momentum --mode all_in
+
+# Runs only the Momentum strategy in both Scaled and All-In mode
+python simulate.py --strategy momentum --mode all
 
 # Generate strategy comparison charts
 python visualize.py
 ```
+
+## 🌐 API Integration & Robust Data Ingestion
+
+The system's input relies on the successful integration and management of external data sources, handled by `core/data_fetcher.py`. This module is designed for **robust API communication**.
+
+- **Source**: Real-time historical OHLCV data is fetched from the Binance **API** using the `ccxt` library.
+- **Robustness**: The `fetch_binance_data` function includes Error Handling (`try...except`) to gracefully manage network errors and exceptions during the API call. This prevents service failure due to external network issues, which is crucial for reliable R&D services.
+- **Timezone Handling**: Raw UTC timestamps are converted to localized `Europe/Sofia` time for consistent data analysis and logging.
 
 ## 🧭 Strategy Exploration & Justification
 
@@ -584,7 +605,7 @@ On paper, a strategy with a -1.8% max drawdown looks “better” than one with 
 
 Drawdown curves help tell the _real story_ behind the PnL line. They give context to whether a strategy’s risk is one big event or lots of little paper cuts, which matters a lot psychologically.
 
-## 🚀 What I’d Improve with More Time
+## 🚀 Future Improvements & Robustness
 
 While this implementation fulfilled the goal of exploring strategy behavior and risk in a simple setting, it’s operating under tight constraints: only \~3.5 days of historical data, no slippage, no latency, and several simplifying assumptions. If I had more time (and resources), here’s what I would expand or refine:
 
@@ -664,17 +685,47 @@ While this implementation fulfilled the goal of exploring strategy behavior and 
 
 ---
 
+### 8. Dependency Integration (C++/Go) and Performance
+
+- I would identify performance-critical components (e.g., metrics calculation, complex signal generation) and rewrite them using **C++ or Go**.
+- This would significantly improve runtime efficiency, directly addressing performance scaling for larger datasets.
+
+---
+
+### 9. CI/CD Parameterization
+
+- I would externalize all strategy parameters (windows, thresholds, and stop-loss ratios) into a configuration file (e.g., YAML/JSON) to enable easy **CI/CD** integration and automated testing.
+
+---
+
+### 10. Logging and Monitoring
+
+- I would implement a structured **logging system** (e.g., using Python's logging `module`) instead of simple `print()` statements.
+- This is crucial for easier **debugging in production/service environments**.
+
+---
+
 ### 📦 Final Thought
 
 This challenge helped me focus on **clarity over complexity**, and to prioritize **capital preservation, interpretability, and reactivity**. With more time, I’d go deeper in market modeling — but even in this limited context, I believe the design choices demonstrate a deliberate and structured approach to trading system design.
 
-## 🐞 Challenges & Bugs I Solved
+## 🐞 Key Problem-Solving Challenges
 
-Building this project wasn’t a straight line — it took a lot of trial, error, and iteration. Below are some real issues I ran into and how I resolved them along the way:
+## Building this project wasn’t a straight line — it took a lot of trial, error, and iteration. Below are some real issues I ran into and how I resolved them along the way:
+
+### 1. CLI Integration for Automation (Fixed)
+
+The initial engine was hard-coded. I refactored `simulate.py` to be controlled via **command-line arguments** (`argparse`), allowing targeted execution of strategies and modes. This was crucial to prepare the engine for **automated testing in CI/CD environments**.
 
 ---
 
-### 1. Timeframe Confusion & Too-Short Testing Windows
+### 2. API Reliability & Error Handling (Fixed)
+
+The initial design did not account for network failures. **FIX:** I implemented robust **Error Handling** (`try...except`) in the data fetching module to gracefully handle external API communication errors, ensuring the system remains stable under network uncertainty.
+
+---
+
+### 3. Timeframe Confusion & Too-Short Testing Windows
 
 In my first attempt, I started with **1-minute candles** and a simple mean reversion strategy (using a ±0.5% threshold) in All-In mode. That gave me only about **3 hours of market data** to play with, which in hindsight was almost useless. The results were super noisy and unstable — too few trades, happening too fast, and basically no meaningful insights.
 
@@ -682,7 +733,7 @@ After some thought (and a few facepalms), I switched to **5-minute candles with 
 
 ---
 
-### 2. Parameter Tuning by Observation, Not Overfitting
+### 4. Parameter Tuning by Observation, Not Overfitting
 
 My initial ±0.5% price threshold (for mean reversion entries) was way too wide on short-term data — the strategy barely traded at all. It was basically asleep at the wheel. 😅 Through experimentation, I found that a **0.2% threshold** worked much better for capturing micro-deviations on the 5-minute timeframe.
 
@@ -690,7 +741,7 @@ I also realized I didn’t need to look back 20 candles at 1m resolution as I or
 
 ---
 
-### 3. Designing the Scaled Execution Mode
+### 5. Designing the Scaled Execution Mode
 
 Initially, I only coded an All-In execution model. It didn’t take long to see that this was too binary and rigid — once the strategy went all-in, it couldn’t respond to any new signals until it fully exited, which meant a lot of missed opportunities and inflexibility.
 
@@ -698,7 +749,7 @@ That realization led me to implement the **Scaled mode** (95% buy / 5% sell). Ho
 
 ---
 
-### 4. Rounding Bug That Broke Trade Logic
+### 6. Rounding Bug That Broke Trade Logic
 
 At one point, I discovered I was rounding the portfolio values **before** checking the trade conditions. This led to some weird logic errors where a trade was skipped even though, in reality, there was enough capital to execute it.
 
@@ -706,7 +757,7 @@ This bug had me scratching my head for a while. I eventually realized I was esse
 
 ---
 
-### 5. Overoptimistic Metrics Early On
+### 7. Overoptimistic Metrics Early On
 
 In early versions, I was calculating metrics like CAGR and Sharpe as if the simulation was running over **a full year** — which made every strategy look amazingly good on paper 😅. For example, a 3% gain over 3 days was being projected as thousands of percent annualized. Clearly, that was misleading because our test window was just 3.5 days.
 
@@ -741,15 +792,11 @@ More than anything, this project gave me a deeper appreciation for how **fragile
 
 Whether or not my code is perfect, I’m proud of how I approached the problem: like a real-world trader would — with curiosity, discipline, and a healthy respect for uncertainty.
 
-## 📎 Appendix & Project Info
+## 📎 Project Info
 
 ### 📄 License
 
 This project is provided for educational purposes only under the MIT License.
-
-### 🙏 Acknowledgements
-
-Thanks to the Raven team for designing such an open-ended and intellectually rewarding challenge.
 
 ### ⚠️ Disclaimer
 
@@ -760,4 +807,4 @@ Past performance is not indicative of future results.
 ### 👤 Author
 
 **Name:** Riaz Bhuiyan  
-**GitHub:** [@RiazBhuiyan03](https://github.com/RiazBhuiyan03)
+**GitHub:** [@RiazBhuiyanX](https://github.com/RiazBhuiyanX)
