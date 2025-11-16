@@ -7,12 +7,12 @@
 - [🧠 Summary](#-summary)
 - [⚙️ Tech Stack](#%EF%B8%8F-tech-stack)
 - [📂 Project Structure](#%EF%B8%8F-project-structure)
-- [🛠️ How to Run (CLI Automation)](#-how-to-run-cli-automation)
-- [🌐 API Integration & Robust Data Ingestion](#️%EF%B8%8F-api-integration--robust-data-ingestion)
+- [🛠️ How to Run](#-how-to-run)
+- [🌐 API Integration & Robust Data Ingestion](#️-api-integration--robust-data-ingestion)
 - [🧭 Strategy Exploration & Justification](#-strategy-exploration--justification)
 - [📉 Risk Control & Capital Allocation Modeling](#-risk-management--capital-protection)
 - [🔄 Out-of-Sample Performance (Fresh Market Data)](#-out-of-sample-performance-fresh-market-data)
-- [🧪 Core Engine Design (State Management)](#-backtesting-engine-design)
+- [🧪 Core Engine Design (State Management)](#-core-engine-design-state-management)
 - [📊 Metrics & Performance Interpretation](#-metrics--performance-interpretation)
 - [📈 Strategy Performance Comparison: All-In vs Scaled](#-strategy-performance-comparison-all-in-vs-scaled)
 - [📉 Drawdown Analysis & Risk Behavior](#-drawdown-analysis--risk-behavior)
@@ -50,7 +50,7 @@ The project utilizes a modular architecture for separation of concerns and testa
 - `signals/` — Directory for generated strategy signals `.csv`
 - `output/` — Directory for final simulation results and charts (`.csv` + `.png`)
 
-## 🛠️ How to Run (CLI Automation)
+## 🛠️ How to Run
 
 To run the project, follow these steps:
 
@@ -278,7 +278,7 @@ While returns were lower than the initial simulation, strategies continued to be
 
 This reinforces my belief that the logic is **robust**, even if not overfit for maximum gains.
 
-## 🧪 Backtesting Engine Design
+## 🧪 Core Engine Design (State Management)
 
 To test each strategy fairly, I built a simple but consistent backtesting engine that models portfolio state over time. The goal wasn’t to create an industrial-grade simulator, but to capture the **essential dynamics** of trade execution, capital allocation, and risk control.
 
