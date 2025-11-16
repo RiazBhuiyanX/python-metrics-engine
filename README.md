@@ -8,7 +8,7 @@
 - [⚙️ Tech Stack](#%EF%B8%8F-tech-stack)
 - [📂 Project Structure](#%EF%B8%8F-project-structure)
 - [🛠️ How to Run (CLI Automation)](#-how-to-run-cli-automation)
-- [🌐 API Integration & Robust Data Ingestion](#️-api-integration--robust-data-ingestion)
+- [🌐 API Integration & Robust Data Ingestion](#️%EF%B8%8F-api-integration--robust-data-ingestion)
 - [🧭 Strategy Exploration & Justification](#-strategy-exploration--justification)
 - [📉 Risk Control & Capital Allocation Modeling](#-risk-management--capital-protection)
 - [🔄 Out-of-Sample Performance (Fresh Market Data)](#-out-of-sample-performance-fresh-market-data)
@@ -711,7 +711,7 @@ This challenge helped me focus on **clarity over complexity**, and to prioritize
 
 ## 🐞 Key Problem-Solving Challenges
 
-## Building this project wasn’t a straight line — it took a lot of trial, error, and iteration. Below are some real issues I ran into and how I resolved them along the way:
+Building this project wasn’t a straight line — it took a lot of trial, error, and iteration. Below are some real issues I ran into and how I resolved them along the way:
 
 ### 1. CLI Integration for Automation (Fixed)
 
